@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterFragment">
+
+    <TextView
+        android:id="@+id/registerLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Zarejestruj się"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guide20" />
+
+    <EditText
+        android:id="@+id/userRegInput"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:inputType="textPersonName"
+        android:text="Nazwa użytkownika"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerLabel" />
+
+    <EditText
+        android:id="@+id/passwordRegInput"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="textPersonName"
+        android:text="Hasło"
+        app:layout_constraintEnd_toEndOf="@+id/userRegInput"
+        app:layout_constraintStart_toStartOf="@+id/userRegInput"
+        app:layout_constraintTop_toBottomOf="@+id/userRegInput" />
+
+    <EditText
+        android:id="@+id/confPassRegInput"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="textPersonName"
+        android:text="Powtórz hasło"
+        app:layout_constraintEnd_toEndOf="@+id/passwordRegInput"
+        app:layout_constraintStart_toStartOf="@+id/passwordRegInput"
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegInput" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/black"
+        android:text="Zarejestruj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confPassRegInput" />
+
+    <ImageButton
+        android:id="@+id/backLogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/white"
+        android:src="?attr/actionModeCloseDrawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

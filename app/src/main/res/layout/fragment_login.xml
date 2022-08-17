@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginFragment">
+
+
+    <TextView
+        android:id="@+id/loginLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Zaloguj się"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <EditText
+        android:id="@+id/userInput"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="textPersonName"
+        android:text="Nazwa użytkownika"
+        app:layout_constraintEnd_toEndOf="@+id/loginLabel"
+        app:layout_constraintStart_toStartOf="@+id/loginLabel"
+        app:layout_constraintTop_toBottomOf="@+id/loginLabel" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="textPersonName"
+        android:text="Hasło"
+        app:layout_constraintEnd_toEndOf="@+id/userInput"
+        app:layout_constraintStart_toStartOf="@+id/userInput"
+        app:layout_constraintTop_toBottomOf="@+id/userInput" />
+
+    <TextView
+        android:id="@+id/newRegLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Nie masz jeszcze konta?"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline55" />
+
+    <Button
+        android:id="@+id/newRegButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/black"
+        android:text="Zarejestruj się"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newRegLabel" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/black"
+        android:text="Zaloguj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+</androidx.constraintlayout.widget.ConstraintLayout>
