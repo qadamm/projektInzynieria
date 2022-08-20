@@ -3,6 +3,7 @@ package com.example.projekt
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.projekt.databinding.ActivityMainBinding
 //import com.example.projekt.Question
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,63 +12,63 @@ import kotlinx.coroutines.withContext
 import retrofit2.*
 
 class MainActivity : AppCompatActivity() {
-   // private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
     //@RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // binding = ActivityMainBinding.inflate(layoutInflater)
-        //setContentView(binding.root)
-        setContentView(R.layout.activity_main)
-        getAllQuestions()
-        login()
-        register()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //setContentView(R.layout.activity_main)
+//        getAllQuestions()
+//        login()
+//        register()
     }
 
-    fun login() {
-        val request = LoginRequest()
-        request.email = "fifi@fifi.pl"
-        request.password = "fifi"
+//    fun login() {
+//        val request = LoginRequest()
+//        request.email = "fifi@fifi.pl"
+//        request.password = "fifi"
+//        retrofit = ApiClient.getRetrofit()
+//        apiService = retrofit.create(ApiService::class.java)
+//        apiService.login(request).enqueue(object: Callback<LoginResponse>{
+//            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+//                Log.e("error login", t.message.toString())
+//            }
+//
+//            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+//                val user = response.body()
+//                Log.e("Login token", user!!.token.toString())
+//            }
+//        })
+//    }
+//
+//    fun register() {
+//        val request = RegisterRequest()
+//        request.username = "ahhahaahaaa"
+//        request.email = "ahahaaaaa@email.ru"
+//        request.password = "ahhaa"
+//        retrofit = ApiClient.getRetrofit()
+//        apiService = retrofit.create(ApiService::class.java)
+//        apiService.register(request).enqueue(object: Callback<RegisterResponse>{
+//            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+//                Log.e("error register!", t.message.toString())
+//            }
+//
+//            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+//                val user = response.body()
+//                Log.e("Zarejestrowany email", user!!.email.toString())
+//                Log.e("Zarejestrowany id", user!!.userId.toString())
+//                Log.e("Zarejestrowany username", user!!.username.toString())
+//            }
+//        })
+//    }
+
+    private fun getAllQuestions(): MutableList<Question> {
         retrofit = ApiClient.getRetrofit()
         apiService = retrofit.create(ApiService::class.java)
-        apiService.login(request).enqueue(object: Callback<LoginResponse>{
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("error login", t.message.toString())
-            }
-
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                val user = response.body()
-                Log.e("Login token", user!!.token.toString())
-            }
-        })
-    }
-
-    fun register() {
-        val request = RegisterRequest()
-        request.username = "uuuuuuuu1"
-        request.email = "uuuuuuuu1@email.fd"
-        request.password = "uuuuuuuu1"
-        retrofit = ApiClient.getRetrofit()
-        apiService = retrofit.create(ApiService::class.java)
-        apiService.register(request).enqueue(object: Callback<RegisterResponse>{
-            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                Log.e("error register!", t.message.toString())
-            }
-
-            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
-                val user = response.body()
-                Log.e("Zarejestrowany email", user!!.email.toString())
-                Log.e("Zarejestrowany id", user!!.userId.toString())
-                Log.e("Zarejestrowany username", user!!.username.toString())
-            }
-        })
-    }
-
-    private fun getAllQuestions(){
-        retrofit = ApiClient.getRetrofit()
-        apiService = retrofit.create(ApiService::class.java)
-
+        val givenList = mutableListOf<Question>()
       CoroutineScope(Dispatchers.IO).launch {
           val response = apiService.getQuestions()
           withContext(Dispatchers.Main){
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                   Log.e("questionnf", items.toString())
                   if (items != null){
                       for (i in 0 until items.count()){
+                          givenList.add(items[i])
                           val id = items[i].answerA?:"N/A"
                           //val id = items[i].questionn?.answerA ?:"N/A"
                           println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -84,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                           Log.e("quesDXtsssssionnf", items[i].toString())
                           //Log.e("quesDXtionnf", id)
                       }
+
                   }
               }
               else{
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity() {
           }
       }
 
-
+        return givenList
 
     }
 
