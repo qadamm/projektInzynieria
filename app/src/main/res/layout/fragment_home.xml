@@ -14,69 +14,161 @@
         android:text="Strona Główna"
         android:textColor="@color/black"
         android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/testButton"
+
+    <LinearLayout
+        android:id="@+id/testLinLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="32dp"
-        android:backgroundTint="@color/teal_200"
-        app:layout_constraintBottom_toTopOf="@id/rankButton"
-        app:layout_constraintEnd_toStartOf="@id/lufaButton"
+        app:layout_constraintBottom_toTopOf="@id/rankLinLayout"
+        app:layout_constraintEnd_toStartOf="@id/lufaLinLayout"
         app:layout_constraintHorizontal_weight="5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeTitle"
         app:layout_constraintVertical_weight="5"
-        app:srcCompat="@drawable/ic_import_contacts" />
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/lufaButton"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rozpocznij test"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/testButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/teal_200"
+            android:backgroundTintMode="multiply"
+            android:elevation="8dp"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_import_contacts" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lufaLinLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="-16dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintBottom_toBottomOf="@+id/testButton"
+        app:layout_constraintBottom_toBottomOf="@+id/testLinLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="5"
-        app:layout_constraintStart_toEndOf="@id/testButton"
-        app:layout_constraintTop_toTopOf="@+id/testButton"
+        app:layout_constraintStart_toEndOf="@id/testLinLayout"
+        app:layout_constraintTop_toTopOf="@+id/testLinLayout"
         app:layout_constraintVertical_weight="5"
-        app:srcCompat="@drawable/ic_flash_on" />
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/rankButton"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lufa pytanie"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/lufaButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/teal_700"
+            android:backgroundTintMode="multiply"
+            android:elevation="8dp"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_flash_on" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/rankLinLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="-16dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/testButton"
-        app:layout_constraintStart_toStartOf="@+id/testButton"
-        app:layout_constraintTop_toBottomOf="@+id/testButton"
+        app:layout_constraintEnd_toEndOf="@+id/testLinLayout"
+        app:layout_constraintStart_toStartOf="@+id/testLinLayout"
+        app:layout_constraintTop_toBottomOf="@+id/testLinLayout"
         app:layout_constraintVertical_weight="5"
-        app:srcCompat="@drawable/ic_leaderboard" />
+        android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/profileButton"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ranking"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/rankButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/purple_200"
+            android:backgroundTintMode="multiply"
+            android:elevation="8dp"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_leaderboard" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profileLinLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:backgroundTint="@color/purple_200"
-        app:layout_constraintBottom_toBottomOf="@+id/rankButton"
-        app:layout_constraintEnd_toEndOf="@+id/lufaButton"
-        app:layout_constraintStart_toStartOf="@+id/lufaButton"
-        app:layout_constraintTop_toTopOf="@+id/rankButton"
+        app:layout_constraintBottom_toBottomOf="@+id/rankLinLayout"
+        app:layout_constraintEnd_toEndOf="@+id/lufaLinLayout"
+        app:layout_constraintStart_toStartOf="@+id/lufaLinLayout"
+        app:layout_constraintTop_toTopOf="@+id/rankLinLayout"
         app:layout_constraintVertical_weight="5"
-        app:srcCompat="@drawable/ic_account_circle" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Twój profil"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/profileButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/purple_200"
+            android:backgroundTintMode="multiply"
+            android:elevation="8dp"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_account_circle" />
+
+    </LinearLayout>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintGuide_percent="0.8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

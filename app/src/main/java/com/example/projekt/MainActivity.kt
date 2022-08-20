@@ -65,10 +65,9 @@ class MainActivity : AppCompatActivity() {
 //        })
 //    }
 
-    private fun getAllQuestions(): MutableList<Question> {
+    private fun getAllQuestions() {
         retrofit = ApiClient.getRetrofit()
         apiService = retrofit.create(ApiService::class.java)
-        val givenList = mutableListOf<Question>()
       CoroutineScope(Dispatchers.IO).launch {
           val response = apiService.getQuestions()
           withContext(Dispatchers.Main){
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                   Log.e("questionnf", items.toString())
                   if (items != null){
                       for (i in 0 until items.count()){
-                          givenList.add(items[i])
                           val id = items[i].answerA?:"N/A"
                           //val id = items[i].questionn?.answerA ?:"N/A"
                           println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -95,7 +93,6 @@ class MainActivity : AppCompatActivity() {
           }
       }
 
-        return givenList
 
     }
 

@@ -15,6 +15,7 @@
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/account_circle-48px.xml" value="0.287" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/arrow_back-48px.xml" value="0.1" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/arrow_forward-48px.xml" value="0.1" />
+        <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/button_rectangle.xml" value="0.1" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/home-48px.xml" value="0.1" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/home_icon.xml" value="0.287" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
@@ -33,6 +34,7 @@
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/layout/fragment_subject_list.xml" value="0.33" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/layout/fragment_task.xml" value="0.358695652173913" />
         <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/layout/old_fragment_subject.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/mikol/AndroidStudioProjects/projekt2projekt/app/src/main/res/layout/test.xml" value="0.33" />
       </map>
     </option>
   </component>
