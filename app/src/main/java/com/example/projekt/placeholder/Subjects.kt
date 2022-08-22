@@ -2,6 +2,8 @@ package com.example.projekt.placeholder
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.util.Log
+import com.example.projekt.R
 import java.util.ArrayList
 
 /**
@@ -15,13 +17,12 @@ object Subjects {
     /**
      * An array of sample (placeholder) items.
      */
+
     val ITEMS: MutableList<SubjectItem> = ArrayList()
 
-    /**
-     * A map of sample (placeholder) items, by ID.
-     */
+    val subList = listOf<String>("Matematyka", "Fizyka", "Chemia")
 
-    private val COUNT = 10
+    private val COUNT = subList.size
 
     init {
         // Add some sample items.
@@ -35,16 +36,9 @@ object Subjects {
     }
 
     private fun createPlaceholderItem(position: Int): SubjectItem {
-        return SubjectItem(position.toString(), "Subject " + position, makeDetails(position))
-    }
-
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
+//        val stringArray = R.array.subjectArray
+//        Log.e("stringARRAYAAYAYAYAYA", stringArray.toString())
+        return SubjectItem(position.toString(), "Subject " + position)
     }
 
     /**
@@ -53,9 +47,8 @@ object Subjects {
 
 }
 
-data class SubjectItem(val id: String, val name: String, val details: String, val imageName: IMGNAMES = IMGNAMES.MAT): Parcelable {
+data class SubjectItem(val id: String, val name: String, val imageName: IMGNAMES = IMGNAMES.MAT): Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         IMGNAMES.values()[parcel.readInt()]
@@ -66,7 +59,6 @@ data class SubjectItem(val id: String, val name: String, val details: String, va
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(name)
-        parcel.writeString(details)
     }
 
     override fun describeContents(): Int {

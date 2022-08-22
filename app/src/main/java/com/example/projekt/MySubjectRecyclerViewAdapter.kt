@@ -42,7 +42,7 @@ class MySubjectRecyclerViewAdapter(
             IMGNAMES.FIZ -> R.drawable.ic_science
             else -> R.drawable.ic_school
         }
-        //holder.imgView = setImageResource(resource)
+        holder.imgView.setImageResource(resource)
         holder.contentView.text = item.name
 
         holder.itemContainer.setOnClickListener{

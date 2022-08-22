@@ -11,8 +11,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="8dp"
-        app:srcCompat="@android:drawable/ic_lock_idle_low_battery"
-        app:tint="#FF9800" />
+        app:srcCompat="@android:drawable/ic_lock_idle_low_battery" />
 
     <TextView
         android:id="@+id/subjectNameText"

@@ -22,6 +22,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         binding.testButton.setOnClickListener{startTest()}
         binding.lufaButton.setOnClickListener{startLufaPytanie()}
         binding.rankButton.setOnClickListener{startRanked()}

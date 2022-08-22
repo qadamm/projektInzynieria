@@ -1,11 +1,13 @@
 package com.example.projekt
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.projekt.databinding.FragmentTaskBinding
 
 class TaskFragment : Fragment() {
@@ -13,6 +15,7 @@ class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
     private var currentTaskNum = 1
     private var maxTaskNum = 10
+    private val args: TaskFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,9 +29,17 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val task: Question
+        maxTaskNum = args.numberOfQuestions
+        if(maxTaskNum >= 100) binding.currentTask.textSize = 18F
 
-        binding.currentTask.text = "$currentTaskNum/50"
+        val isLufa: Boolean = args.lufa
+
+        if(isLufa){
+            binding.prevButton.visibility = View.GONE
+            binding.nextButton.visibility = View.GONE
+        }
+
+        binding.currentTask.text = "$currentTaskNum/$maxTaskNum"
         binding.homeButton.setOnClickListener{backHome()}
         binding.prevButton.setOnClickListener{prevQuestion()}
         binding.nextButton.setOnClickListener{nextQuestion()}
@@ -37,6 +48,9 @@ class TaskFragment : Fragment() {
         binding.ansButton2.setOnClickListener{setAnswerB()}
         binding.ansButton3.setOnClickListener{setAnswerC()}
         binding.ansButton4.setOnClickListener{setAnswerD()}
+
+
+
     }
 
     private fun setAnswerD() {

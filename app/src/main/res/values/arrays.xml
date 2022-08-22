@@ -22,4 +22,10 @@
         <item>50</item>
         <item>100</item>
     </string-array>
+    <string-array name="subjectArray">
+        <item>Matematyka</item>
+        <item>Polska</item>
+        <item>Geografia</item>
+        <item>Inny przedmiot</item>
+    </string-array>
 </resources>

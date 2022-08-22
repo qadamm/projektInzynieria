@@ -14,7 +14,11 @@
             app:destination="@id/subjectFragment" />
         <action
             android:id="@+id/action_homeFragment_to_taskFragment"
-            app:destination="@id/taskFragment" />
+            app:destination="@id/taskFragment" >
+            <argument
+                android:name="lufa"
+                android:defaultValue="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/taskFragment"
@@ -24,6 +28,14 @@
         <action
             android:id="@+id/action_taskFragment_to_resultFragment2"
             app:destination="@id/resultFragment" />
+        <argument
+            android:name="lufa"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="numberOfQuestions"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
