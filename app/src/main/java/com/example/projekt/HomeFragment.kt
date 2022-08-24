@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
 
 
         binding.testButton.setOnClickListener{startTest()}
-        binding.lufaButton.setOnClickListener{startLufaPytanie()}
+        binding.lufaButton.setOnClickListener{findNavController().navigate(R.id.action_homeFragment_to_taskFragment)}
         binding.rankButton.setOnClickListener{startRanked()}
         binding.profileButton.setOnClickListener{showProfile()}
     }
@@ -36,10 +36,6 @@ class HomeFragment : Fragment() {
 
     private fun startRanked() {
         TODO("Not yet implemented")
-    }
-
-    private fun startLufaPytanie() {
-        findNavController().navigate(R.id.action_homeFragment_to_taskFragment)
     }
 
     private fun startTest() {

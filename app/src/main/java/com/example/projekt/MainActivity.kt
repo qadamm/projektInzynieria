@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
         //setContentView(R.layout.activity_main)
 //        getAllQuestions()
 //        login()
@@ -65,36 +66,36 @@ class MainActivity : AppCompatActivity() {
 //        })
 //    }
 
-    private fun getAllQuestions() {
-        retrofit = ApiClient.getRetrofit()
-        apiService = retrofit.create(ApiService::class.java)
-      CoroutineScope(Dispatchers.IO).launch {
-          val response = apiService.getQuestions()
-          withContext(Dispatchers.Main){
-              if (response.isSuccessful){
-                  val items = response.body()?.data
-                  Log.e("questionnf", items.toString())
-                  if (items != null){
-                      for (i in 0 until items.count()){
-                          val id = items[i].answerA?:"N/A"
-                          //val id = items[i].questionn?.answerA ?:"N/A"
-                          println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                          println(items[i].toString())
-                          println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                          Log.e("quesDXtsssssionnf", items[i].toString())
-                          //Log.e("quesDXtionnf", id)
-                      }
-
-                  }
-              }
-              else{
-                  Log.e("RETROFIT_ERROR", response.code().toString())
-              }
-          }
-      }
-
-
-    }
+//    private fun getAllQuestions() {
+//        retrofit = ApiClient.getRetrofit()
+//        apiService = retrofit.create(ApiService::class.java)
+//      CoroutineScope(Dispatchers.IO).launch {
+//          val response = apiService.getQuestions()
+//          withContext(Dispatchers.Main){
+//              if (response.isSuccessful){
+//                  val items = response.body()?.data
+//                  Log.e("questionnf", items.toString())
+//                  if (items != null){
+//                      for (i in 0 until items.count()){
+//                          val id = items[i].answerA?:"N/A"
+//                          //val id = items[i].questionn?.answerA ?:"N/A"
+//                          println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//                          println(items[i].toString())
+//                          println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//                          Log.e("quesDXtsssssionnf", items[i].toString())
+//                          //Log.e("quesDXtionnf", id)
+//                      }
+//
+//                  }
+//              }
+//              else{
+//                  Log.e("RETROFIT_ERROR", response.code().toString())
+//              }
+//          }
+//      }
+//
+//
+//    }
 
 
 

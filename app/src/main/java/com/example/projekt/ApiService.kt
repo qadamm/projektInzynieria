@@ -8,8 +8,8 @@ import retrofit2.http.POST
 
 interface ApiService {
     @GET("api/questions/")
-    //fun getQuestions(): Call<List<Question>>
-    suspend fun getQuestions(): Response<Questions>
+    fun getQuestions(): Call<Questions>
+//    suspend fun getQuestions(): Response<Questions>
 
     @POST("/api/token")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>

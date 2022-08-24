@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/taskContainer"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TaskFragment">
 
@@ -18,6 +18,7 @@
         android:minHeight="48dp"
         android:src="?attr/homeAsUpIndicator"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/taskLabel"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,9 +31,28 @@
         android:backgroundTint="@color/white"
         android:elevation="10dp"
         android:rotation="180"
+
         android:src="?attr/actionModeCloseDrawable"
+        app:layout_constraintBottom_toTopOf="@+id/taskLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/endTestButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/design_default_color_error"
+        android:elevation="10dp"
+        android:text="Zakończ test"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/taskLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/homeButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -42,27 +62,42 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_home"
+        app:layout_constraintBottom_toTopOf="@+id/taskLabel"
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/material_dynamic_neutral40" />
 
     <TextView
+        android:id="@+id/currentSubject"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Język Polski"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/taskLabel"
+        app:layout_constraintEnd_toStartOf="@+id/homeButton"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/homeButton" />
+
+    <TextView
         android:id="@+id/currentTask"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:text="0/50"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/homeButton"
+        android:autoSizeMaxTextSize="24dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="100/100"
+        app:layout_constraintBottom_toTopOf="@+id/taskLabel"
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toEndOf="@+id/homeButton"
         app:layout_constraintTop_toTopOf="@+id/homeButton" />
 
     <TextView
         android:id="@+id/taskDescription"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:paddingStart="4dp"
@@ -159,7 +194,7 @@
         android:clickable="true"
         android:src="@drawable/ic_question_mark"
         app:backgroundTint="@color/black"
-        app:borderWidth="3dp"
+        app:borderWidth="4dp"
         app:fabSize="auto"
         app:layout_constraintEnd_toEndOf="@+id/taskDescription"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -177,4 +212,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
