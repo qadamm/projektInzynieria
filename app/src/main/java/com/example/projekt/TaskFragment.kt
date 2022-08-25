@@ -14,6 +14,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.*
 
 class TaskFragment : Fragment() {
 
@@ -21,6 +22,8 @@ class TaskFragment : Fragment() {
     private var currentTaskNum = 1
     private var correctAnswers = 0
     private var maxTaskNum = 10
+    private var isEnded = false
+    private var Answers = IntArray(maxTaskNum){9}
     private val args: TaskFragmentArgs by navArgs()
 
 
@@ -44,7 +47,6 @@ class TaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         maxTaskNum = args.numberOfQuestions
 
         val isLufa: Boolean = args.lufa
@@ -70,6 +72,12 @@ class TaskFragment : Fragment() {
     private fun endTest() {
         val actionTaskFragmentToResultFragment = TaskFragmentDirections.actionTaskFragmentToResultFragment(maxTaskNum, correctAnswers)
         findNavController().navigate(actionTaskFragmentToResultFragment)
+        currentTaskNum = 1
+        isEnded = true
+        setAnswers()
+
+
+
     }
 
     private fun setAnswers() {
@@ -79,6 +87,15 @@ class TaskFragment : Fragment() {
         binding.ansButton2.text = "B: " + questionsList!![currentTaskNum - 1].answerB
         binding.ansButton3.text = "C: " + questionsList!![currentTaskNum - 1].answerC
         binding.ansButton4.text = "D: " + questionsList!![currentTaskNum - 1].answerD
+
+        Log.e("skonczony?", isEnded.toString())
+        if(Answers[currentTaskNum - 1 ] != 9){
+            setAnswer(Answers[currentTaskNum -1 ])
+        }
+        if(isEnded) {
+            setAnswer(Answers[currentTaskNum -1 ])
+        }
+
     }
 
     private fun setAnswer(position: Int) {
@@ -88,6 +105,12 @@ class TaskFragment : Fragment() {
             2 -> checkCorrect(2)
             3 -> checkCorrect(3)
         }
+        Answers[currentTaskNum -1 ] = position
+        binding.ansButton.isClickable = false
+        binding.ansButton2.isClickable = false
+        binding.ansButton3.isClickable = false
+        binding.ansButton4.isClickable = false
+
     }
 
     private fun checkCorrect(position: Int) {
@@ -162,6 +185,7 @@ class TaskFragment : Fragment() {
             binding.endTestButton.visibility = View.GONE
         }
         if(currentTaskNum == 1) binding.prevButton.visibility = View.GONE
+        clearAnswerColors()
         setAnswers()
     }
 
@@ -175,6 +199,12 @@ class TaskFragment : Fragment() {
         }
         clearAnswerColors()
         setAnswers()
+        if(Answers[currentTaskNum - 1] == 9) {
+            binding.ansButton.isClickable = true
+            binding.ansButton2.isClickable = true
+            binding.ansButton3.isClickable = true
+            binding.ansButton4.isClickable = true
+        }
     }
 
     private fun clearAnswerColors() {
