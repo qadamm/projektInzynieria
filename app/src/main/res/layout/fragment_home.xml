@@ -110,7 +110,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ranking"
+            android:text="Gra rankingowa"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -171,4 +171,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
+
+    <TextView
+        android:id="@+id/loggedAccountName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Zalogowany jako NazwaKonta"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

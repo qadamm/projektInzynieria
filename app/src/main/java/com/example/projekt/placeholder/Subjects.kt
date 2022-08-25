@@ -2,8 +2,6 @@ package com.example.projekt.placeholder
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.util.Log
-import com.example.projekt.R
 import java.util.ArrayList
 
 /**
@@ -20,7 +18,7 @@ object Subjects {
 
     val ITEMS: MutableList<SubjectItem> = ArrayList()
 
-    val subList = listOf<String>("Matematyka", "Fizyka", "Chemia")
+    private val subList: List<String> = listOf("Matematyka", "Język Polski", "Język Angielski", "Fizyka", "Chemia", "Biologia", "Geografia")
 
     private val COUNT = subList.size
 
@@ -36,9 +34,7 @@ object Subjects {
     }
 
     private fun createPlaceholderItem(position: Int): SubjectItem {
-//        val stringArray = R.array.subjectArray
-//        Log.e("stringARRAYAAYAYAYAYA", stringArray.toString())
-        return SubjectItem(position.toString(), "Subject " + position)
+        return SubjectItem(position.toString(), subList[position-1])
     }
 
     /**

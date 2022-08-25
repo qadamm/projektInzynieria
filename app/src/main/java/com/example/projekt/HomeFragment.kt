@@ -24,21 +24,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding.testButton.setOnClickListener{startTest()}
-        binding.lufaButton.setOnClickListener{findNavController().navigate(R.id.action_homeFragment_to_taskFragment)}
+        binding.testButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_subjectFragment) }
+        binding.lufaButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_taskFragment) }
         binding.rankButton.setOnClickListener{startRanked()}
-        binding.profileButton.setOnClickListener{showProfile()}
-    }
-
-    private fun showProfile() {
-        TODO("Not yet implemented")
+        binding.profileButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_profileFragment) }
     }
 
     private fun startRanked() {
         TODO("Not yet implemented")
-    }
-
-    private fun startTest() {
-        findNavController().navigate(R.id.action_homeFragment_to_subjectFragment)
     }
 }

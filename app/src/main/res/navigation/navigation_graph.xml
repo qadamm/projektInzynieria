@@ -19,6 +19,9 @@
                 android:name="lufa"
                 android:defaultValue="true" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskFragment"
@@ -81,4 +84,9 @@
             android:id="@+id/action_subjectFragment_to_taskFragment"
             app:destination="@id/taskFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.projekt.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

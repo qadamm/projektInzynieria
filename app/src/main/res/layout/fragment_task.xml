@@ -95,19 +95,33 @@
         app:layout_constraintStart_toEndOf="@+id/homeButton"
         app:layout_constraintTop_toTopOf="@+id/homeButton" />
 
+    <ImageView
+        android:id="@+id/taskImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/stat_notify_sync"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="0dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:tint="@color/black" />
+
     <TextView
         android:id="@+id/taskDescription"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
+        android:autoSizeTextType="uniform"
         android:paddingStart="4dp"
         android:text="@string/placeholder"
         android:textAlignment="textStart"
-        android:textSize="20sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@id/taskImage" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -130,7 +144,7 @@
         android:layout_margin="8dp"
         android:text="Pytanie:"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/taskDescription"
+        app:layout_constraintBottom_toTopOf="@+id/taskImage"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

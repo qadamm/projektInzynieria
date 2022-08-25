@@ -2,7 +2,6 @@ package com.example.projekt
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -35,11 +34,15 @@ class MySubjectRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        val resource = when(item.imageName){
+        val resource = when(item.name){
             //rysunki w liscie przedmiotów
-            IMGNAMES.MAT -> R.drawable.ic_architecture
-            IMGNAMES.POL -> R.drawable.ic_import_contacts
-            IMGNAMES.FIZ -> R.drawable.ic_science
+            "Matematyka" -> R.drawable.ic_maths
+            "Język Polski" -> R.drawable.ic_import_contacts
+            "Chemia" -> R.drawable.ic_chemistry
+            "Geografia" -> R.drawable.ic_geography
+            "Język Angielski" -> R.drawable.ic_english_speaking_icon
+            "Fizyka" -> R.drawable.ic_physics
+            "Biologia" -> R.drawable.ic_biology
             else -> R.drawable.ic_school
         }
         holder.imgView.setImageResource(resource)

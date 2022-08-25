@@ -1,5 +1,6 @@
 package com.example.projekt
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -25,9 +26,9 @@ class TaskFragment : Fragment() {
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
     private var mSelectedOptionPosition : String = ""
-    private var questionsList: List<Question>? = listOf(Question(ID=1, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:53:46Z", DeletedAt=null, question="Ladowanie pytania...", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="CA", subject="Polski", year=2021),
-        Question(ID=2, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:53:46Z", DeletedAt=null, question="Tresc Pytania2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="CA", subject="Polski", year=2021),
-        Question(ID=3, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:33:46Z", DeletedAt=null, question="Tresc Pytania3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="CA", subject="Angielski", year=2022))
+    private var questionsList: List<Question>? = listOf(Question(ID=1, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:53:46Z", DeletedAt=null, question="Ladowanie pytania...", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="0", subject="Polski", year=2021),
+        Question(ID=2, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:53:46Z", DeletedAt=null, question="Tresc Pytania2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="3", subject="Polski", year=2021),
+        Question(ID=3, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:33:46Z", DeletedAt=null, question="Tresc Pytania3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="2", subject="Angielski", year=2022))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,7 @@ class TaskFragment : Fragment() {
         maxTaskNum = args.numberOfQuestions
 
         val isLufa: Boolean = args.lufa
-        val subject: String = args.subject?.name ?: "Lufa"
+        val subject: String? = questionsList!![currentTaskNum - 1].subject
 
         if(isLufa){
             binding.prevButton.visibility = View.GONE
@@ -90,7 +91,63 @@ class TaskFragment : Fragment() {
     }
 
     private fun checkCorrect(position: Int) {
-
+        if(position == questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5){
+            when(position){
+                0 -> {
+                    binding.ansButton.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton.setTextColor(Color.WHITE)
+                }
+                1 -> {
+                    binding.ansButton2.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton2.setTextColor(Color.WHITE)
+                }
+                2 -> {
+                    binding.ansButton3.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton3.setTextColor(Color.WHITE)
+                }
+                3 -> {
+                    binding.ansButton4.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton4.setTextColor(Color.WHITE)
+                }
+            }
+        } else {
+            when(position){
+                0 -> {
+                    binding.ansButton.setBackgroundColor(Color.RED)
+                    binding.ansButton.setTextColor(Color.WHITE)
+                }
+                1 -> {
+                    binding.ansButton2.setBackgroundColor(Color.RED)
+                    binding.ansButton2.setTextColor(Color.WHITE)
+                }
+                2 -> {
+                    binding.ansButton3.setBackgroundColor(Color.RED)
+                    binding.ansButton3.setTextColor(Color.WHITE)
+                }
+                3 -> {
+                    binding.ansButton4.setBackgroundColor(Color.RED)
+                    binding.ansButton4.setTextColor(Color.WHITE)
+                }
+            }
+            when(questionsList!![currentTaskNum - 1].correctAnswer?.toInt()){
+                0 -> {
+                    binding.ansButton.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton.setTextColor(Color.WHITE)
+                }
+                1 -> {
+                    binding.ansButton2.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton2.setTextColor(Color.WHITE)
+                }
+                2 -> {
+                    binding.ansButton3.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton3.setTextColor(Color.WHITE)
+                }
+                3 -> {
+                    binding.ansButton4.setBackgroundColor(Color.parseColor("#008800"))
+                    binding.ansButton4.setTextColor(Color.WHITE)
+                }
+            }
+        }
     }
 
     private fun getHint() {
@@ -105,6 +162,18 @@ class TaskFragment : Fragment() {
             binding.nextButton.visibility = View.GONE
             binding.endTestButton.visibility = View.VISIBLE
         }
+        clearAnswerColors()
+    }
+
+    private fun clearAnswerColors() {
+        binding.ansButton.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+        binding.ansButton2.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+        binding.ansButton3.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+        binding.ansButton4.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+        binding.ansButton.setTextColor(Color.BLACK)
+        binding.ansButton2.setTextColor(Color.BLACK)
+        binding.ansButton3.setTextColor(Color.BLACK)
+        binding.ansButton4.setTextColor(Color.BLACK)
     }
 
     private fun prevQuestion() {
