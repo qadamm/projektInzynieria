@@ -23,6 +23,8 @@ class TaskFragment : Fragment() {
     private var maxTaskNum = 10
     private val args: TaskFragmentArgs by navArgs()
 
+
+
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
     private var mSelectedOptionPosition : String = ""
@@ -36,7 +38,7 @@ class TaskFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTaskBinding.inflate(inflater, container, false)
-//        getAllQuestions()
+        getAllQuestions()
         return binding.root
     }
 
@@ -46,15 +48,12 @@ class TaskFragment : Fragment() {
         maxTaskNum = args.numberOfQuestions
 
         val isLufa: Boolean = args.lufa
-        val subject: String? = questionsList!![currentTaskNum - 1].subject
-
         if(isLufa){
             binding.prevButton.visibility = View.GONE
             binding.nextButton.visibility = View.GONE
         }
 
         binding.currentTask.text = "$currentTaskNum/$maxTaskNum"
-        binding.currentSubject.text = subject
         binding.homeButton.setOnClickListener{findNavController().popBackStack(R.id.homeFragment, false)}
         binding.prevButton.setOnClickListener{prevQuestion()}
         binding.nextButton.setOnClickListener{nextQuestion()}
@@ -74,6 +73,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun setAnswers() {
+        binding.currentSubject.text = questionsList!![currentTaskNum - 1].subject
         binding.taskDescription.text = questionsList!![currentTaskNum - 1].question
         binding.ansButton.text = "A: " + questionsList!![currentTaskNum - 1].answerA
         binding.ansButton2.text = "B: " + questionsList!![currentTaskNum - 1].answerB
@@ -154,6 +154,17 @@ class TaskFragment : Fragment() {
         TODO("Not yet implemented")
     }
 
+    private fun prevQuestion() {
+        currentTaskNum -= 1
+        binding.currentTask.text = "$currentTaskNum/$maxTaskNum"
+        if(binding.nextButton.visibility == View.GONE){
+            binding.nextButton.visibility = View.VISIBLE
+            binding.endTestButton.visibility = View.GONE
+        }
+        if(currentTaskNum == 1) binding.prevButton.visibility = View.GONE
+        setAnswers()
+    }
+
     private fun nextQuestion() {
         currentTaskNum += 1
         binding.currentTask.text = "$currentTaskNum/$maxTaskNum"
@@ -163,6 +174,7 @@ class TaskFragment : Fragment() {
             binding.endTestButton.visibility = View.VISIBLE
         }
         clearAnswerColors()
+        setAnswers()
     }
 
     private fun clearAnswerColors() {
@@ -174,16 +186,6 @@ class TaskFragment : Fragment() {
         binding.ansButton2.setTextColor(Color.BLACK)
         binding.ansButton3.setTextColor(Color.BLACK)
         binding.ansButton4.setTextColor(Color.BLACK)
-    }
-
-    private fun prevQuestion() {
-        currentTaskNum -= 1
-        binding.currentTask.text = "$currentTaskNum/$maxTaskNum"
-        if(binding.nextButton.visibility == View.GONE){
-            binding.nextButton.visibility = View.VISIBLE
-            binding.endTestButton.visibility = View.GONE
-        }
-        if(currentTaskNum == 1) binding.prevButton.visibility = View.GONE
     }
 
     private fun getAllQuestions(): List<Question>? {

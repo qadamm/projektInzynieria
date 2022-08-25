@@ -43,6 +43,10 @@
             android:name="subject"
             app:argType="com.example.projekt.placeholder.SubjectItem"
             app:nullable="true" />
+        <argument
+            android:name="year"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"

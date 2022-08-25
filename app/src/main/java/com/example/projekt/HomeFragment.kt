@@ -25,9 +25,14 @@ class HomeFragment : Fragment() {
 
 
         binding.testButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_subjectFragment) }
-        binding.lufaButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_taskFragment) }
+        binding.lufaButton.setOnClickListener{ startLufa() }
         binding.rankButton.setOnClickListener{startRanked()}
         binding.profileButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_profileFragment) }
+    }
+
+    private fun startLufa() {
+        val actionHomeFragmentToTaskFragment = HomeFragmentDirections.actionHomeFragmentToTaskFragment(lufa = true, subject = null)
+        findNavController().navigate(actionHomeFragmentToTaskFragment)
     }
 
     private fun startRanked() {

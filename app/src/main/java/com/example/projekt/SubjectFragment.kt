@@ -32,7 +32,7 @@ class SubjectFragment : Fragment(), SubjectListListener {
     }
 
     override fun onItemClick(position: Int) {
-        val actionSubjectFragmentToTaskFragment = SubjectFragmentDirections.actionSubjectFragmentToTaskFragment(lufa = false, numberOfQuestions = binding.numberSpinner.selectedItem.toString().toInt(), subject = Subjects.ITEMS[position])
+        val actionSubjectFragmentToTaskFragment = SubjectFragmentDirections.actionSubjectFragmentToTaskFragment(lufa = false, numberOfQuestions = binding.numberSpinner.selectedItem.toString().toInt(), subject = Subjects.ITEMS[position], year = 2022)
         findNavController().navigate(actionSubjectFragmentToTaskFragment)
     }
 
