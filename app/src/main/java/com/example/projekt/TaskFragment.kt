@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 class TaskFragment : Fragment() {
 
@@ -22,6 +23,7 @@ class TaskFragment : Fragment() {
     private var currentTaskNum = 1
     private var correctAnswers = 0
     private var maxTaskNum = 10
+    private var isHinted = false
     private var isEnded = false
     private var Answers = IntArray(maxTaskNum){9}
     private val args: TaskFragmentArgs by navArgs()
@@ -174,7 +176,35 @@ class TaskFragment : Fragment() {
     }
 
     private fun getHint() {
-        TODO("Not yet implemented")
+        isHinted = true;
+        binding.hintButton.isClickable = false
+        var BadAnswers  = mutableListOf<Int>(0,1,2,3)
+        BadAnswers.remove(questionsList!![currentTaskNum - 1].correctAnswer?.toInt())
+        var randomIndex = BadAnswers.random()
+        when(randomIndex){
+            0 -> {
+                binding.ansButton.setBackgroundColor(Color.parseColor("#808080"))
+                binding.ansButton.setTextColor(Color.RED)
+                binding.ansButton.isClickable = false
+            }
+            1 -> {
+                binding.ansButton2.setBackgroundColor(Color.parseColor("#808080"))
+                binding.ansButton2.setTextColor(Color.RED)
+                binding.ansButton2.isClickable = false
+            }
+            2 -> {
+                binding.ansButton3.setBackgroundColor(Color.parseColor("#808080"))
+                binding.ansButton3.setTextColor(Color.RED)
+                binding.ansButton3.isClickable = false
+            }
+            3 -> {
+                binding.ansButton4.setBackgroundColor(Color.parseColor("#808080"))
+                binding.ansButton4.setTextColor(Color.RED)
+                binding.ansButton4.isClickable = false
+            }
+        }
+
+
     }
 
     private fun prevQuestion() {
