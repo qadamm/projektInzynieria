@@ -32,8 +32,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:hint="Nazwa użytkownika"
         android:inputType="textPersonName"
-        android:text="Nazwa użytkownika"
         app:layout_constraintEnd_toEndOf="@+id/loginLabel"
         app:layout_constraintStart_toStartOf="@+id/loginLabel"
         app:layout_constraintTop_toBottomOf="@+id/loginLabel" />
@@ -43,8 +43,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:hint="Hasło"
         android:inputType="textPersonName"
-        android:text="Hasło"
         app:layout_constraintEnd_toEndOf="@+id/userInput"
         app:layout_constraintStart_toStartOf="@+id/userInput"
         app:layout_constraintTop_toBottomOf="@+id/userInput" />
