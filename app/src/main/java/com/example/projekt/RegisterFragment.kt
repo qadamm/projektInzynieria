@@ -87,6 +87,7 @@ class RegisterFragment : Fragment() {
                     Log.e("Zarejestrowany id", user!!.userId.toString())
                     Log.e("Zarejestrowany username", user!!.username.toString())
                     //tutaj powrót do fragmentu login
+                    findNavController().popBackStack(R.id.loginFragment, false)
                 }else{
                     Log.e("Zarejestrowany email", user.toString())
                     Toast.makeText(getActivity(), "Email/Username jest już zajęty!", Toast.LENGTH_SHORT).show()
