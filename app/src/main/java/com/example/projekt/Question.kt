@@ -20,7 +20,8 @@ data class Question(
     var answerD: String? = null,
     var correctAnswer: String? = null,
     var subject: String? = null,
-    var year: Int? = null
+    var year: Int? = null,
+    var ImageLink: String? = null
 
 )
 
