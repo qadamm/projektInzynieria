@@ -77,6 +77,10 @@ class TaskFragment : Fragment() {
         currentTaskNum = 1
         isEnded = true
         setAnswers()
+        binding.ansButton.isClickable = false
+        binding.ansButton2.isClickable = false
+        binding.ansButton3.isClickable = false
+        binding.ansButton4.isClickable = false
 
 
 
@@ -89,15 +93,52 @@ class TaskFragment : Fragment() {
         binding.ansButton2.text = "B: " + questionsList!![currentTaskNum - 1].answerB
         binding.ansButton3.text = "C: " + questionsList!![currentTaskNum - 1].answerC
         binding.ansButton4.text = "D: " + questionsList!![currentTaskNum - 1].answerD
-
+        isAnswerEnable()
+        isHintEnable()
         Log.e("skonczony?", isEnded.toString())
         if(Answers[currentTaskNum - 1 ] != 9){
             setAnswer(Answers[currentTaskNum -1 ])
         }
-        if(isEnded) {
+        if(isEnded && Answers[currentTaskNum -1 ] != 9) {
             setAnswer(Answers[currentTaskNum -1 ])
         }
+        if(isEnded && Answers[currentTaskNum -1 ] == 9) {
+            Answers[currentTaskNum -1 ] = questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5
+            when(Answers[currentTaskNum -1 ]) {
+                0 -> {
+                    binding.ansButton.setBackgroundColor(Color.parseColor("#ff8800"))
+                    binding.ansButton.setTextColor(Color.WHITE)
+                }
+                1 -> {
+                    binding.ansButton2.setBackgroundColor(Color.parseColor("#ff8800"))
+                    binding.ansButton2.setTextColor(Color.WHITE)
+                }
+                2 -> {
+                    binding.ansButton3.setBackgroundColor(Color.parseColor("#ff8800"))
+                    binding.ansButton3.setTextColor(Color.WHITE)
+                }
+                3 -> {
+                    binding.ansButton4.setBackgroundColor(Color.parseColor("#ff8800"))
+                    binding.ansButton4.setTextColor(Color.WHITE)
+                }
+            }
+        }
 
+
+    }
+
+    private fun isAnswerEnable() {
+        if(Answers[currentTaskNum-1] != 9 || isEnded) {
+            binding.ansButton.isClickable = false
+            binding.ansButton2.isClickable = false
+            binding.ansButton3.isClickable = false
+            binding.ansButton4.isClickable = false
+        } else {
+            binding.ansButton.isClickable = true
+            binding.ansButton2.isClickable = true
+            binding.ansButton3.isClickable = true
+            binding.ansButton4.isClickable = true
+        }
     }
 
     private fun setAnswer(position: Int) {
@@ -108,6 +149,7 @@ class TaskFragment : Fragment() {
             3 -> checkCorrect(3)
         }
         Answers[currentTaskNum -1 ] = position
+        isHintEnable()
         binding.ansButton.isClickable = false
         binding.ansButton2.isClickable = false
         binding.ansButton3.isClickable = false
@@ -174,12 +216,15 @@ class TaskFragment : Fragment() {
             }
         }
     }
-
+    private fun isHintEnable() {
+        if(Answers[currentTaskNum -1 ] != 9 || isHinted || isEnded) binding.hintButton.visibility = View.GONE
+        else binding.hintButton.visibility = View.VISIBLE
+    }
     private fun getHint() {
         isHinted = true;
-        binding.hintButton.isClickable = false
+        binding.hintButton.visibility = View.GONE
         var BadAnswers  = mutableListOf<Int>(0,1,2,3)
-        BadAnswers.remove(questionsList!![currentTaskNum - 1].correctAnswer?.toInt())
+        BadAnswers.remove(questionsList!![currentTaskNum -1 ].correctAnswer?.toInt())
         var randomIndex = BadAnswers.random()
         when(randomIndex){
             0 -> {
@@ -217,6 +262,7 @@ class TaskFragment : Fragment() {
         if(currentTaskNum == 1) binding.prevButton.visibility = View.GONE
         clearAnswerColors()
         setAnswers()
+
     }
 
     private fun nextQuestion() {
@@ -227,14 +273,11 @@ class TaskFragment : Fragment() {
             binding.nextButton.visibility = View.GONE
             binding.endTestButton.visibility = View.VISIBLE
         }
+        if(isEnded){
+            binding.endTestButton.visibility = View.GONE
+        }
         clearAnswerColors()
         setAnswers()
-        if(Answers[currentTaskNum - 1] == 9) {
-            binding.ansButton.isClickable = true
-            binding.ansButton2.isClickable = true
-            binding.ansButton3.isClickable = true
-            binding.ansButton4.isClickable = true
-        }
     }
 
     private fun clearAnswerColors() {
