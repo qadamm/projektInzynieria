@@ -43,7 +43,12 @@ class TaskFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTaskBinding.inflate(inflater, container, false)
-        getAllQuestions()
+        //getAllQuestions()
+        println(args.numberOfQuestions)
+        println(args.subject!!.name)
+        println(args.year)
+        println(args.year)
+        getSelectedQuestions(args.numberOfQuestions, args.subject!!.name, args.year, args.year)
         return binding.root
     }
 
@@ -216,10 +221,12 @@ class TaskFragment : Fragment() {
             }
         }
     }
+
     private fun isHintEnable() {
         if(Answers[currentTaskNum -1 ] != 9 || isHinted || isEnded) binding.hintButton.visibility = View.GONE
         else binding.hintButton.visibility = View.VISIBLE
     }
+
     private fun getHint() {
         isHinted = true;
         binding.hintButton.visibility = View.GONE
@@ -292,7 +299,6 @@ class TaskFragment : Fragment() {
     }
 
     private fun getAllQuestions(): List<Question>? {
-        //var pytanie = findViewById<TextView>(R.id.taskDescription)
         var items: List<Question>? = emptyList()
         retrofit = ApiClient.getRetrofit()
         apiService = retrofit.create(ApiService::class.java)
@@ -305,19 +311,30 @@ class TaskFragment : Fragment() {
                 val user = response.body()?.data
                 questionsList = user
                 setAnswers()
-
-//                for (i in 0 until user!!.count()) {
-//                    //val temp =  user!![i].question?:"N/A"
-//                    //pytanie.text = user!![i].question?.toString()
-//                    println(user!![i].question?.toString())
-//                    break
-//                }
-//                Log.e("Zarejestrowany email", items!!.toString())
             }
 
         })
-
-        // Log.e("Zarejestrowany email", items!!.toString())
         return items
     }
+
+    private fun getSelectedQuestions(quantity: Int, subject: String, first: Int, last: Int): List<Question>? {
+        var items: List<Question>? = emptyList()
+        retrofit = ApiClient.getRetrofit()
+        apiService = retrofit.create(ApiService::class.java)
+        apiService.getSelectedQuestions(quantity, subject, first, last).enqueue(object : Callback<Questions> {
+            override fun onFailure(call: Call<Questions>, t: Throwable) {
+                Log.e("error register!", t.message.toString())
+            }
+
+            override fun onResponse(call: Call<Questions>, response: Response<Questions>) {
+                val user = response.body()?.data
+                questionsList = user
+                setAnswers()
+            }
+
+        })
+        return items
+    }
+
+
 }
