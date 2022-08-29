@@ -27,7 +27,7 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.resultPoints.text = args.correctAnswers.toString() + "/" + args.numOfTasks.toString()
-        binding.resultScore.text = (args.correctAnswers.toDouble() / args.numOfTasks).toInt().toString() + "%"
+        binding.resultScore.text = ((args.correctAnswers.toDouble() / args.numOfTasks)*100).toInt().toString() + "%"
         binding.returnHomeButton.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
         binding.showAnsButton.setOnClickListener { findNavController().popBackStack(R.id.taskFragment, false) }
     }

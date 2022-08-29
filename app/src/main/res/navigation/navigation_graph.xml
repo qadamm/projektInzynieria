@@ -47,6 +47,10 @@
             android:name="year"
             app:argType="integer"
             android:defaultValue="1" />
+        <argument
+            android:name="isRanked"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
