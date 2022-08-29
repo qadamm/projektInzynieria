@@ -107,8 +107,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:tint="@color/black" />
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <TextView
         android:id="@+id/taskDescription"
@@ -132,6 +131,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.45" />
+
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

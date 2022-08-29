@@ -1,5 +1,6 @@
 package com.example.projekt
 
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.projekt.databinding.FragmentTaskBinding
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,11 +46,16 @@ class TaskFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentTaskBinding.inflate(inflater, container, false)
         //getAllQuestions()
-        println(args.numberOfQuestions)
-        println(args.subject!!.name)
-        println(args.year)
-        println(args.year)
-        getSelectedQuestions(args.numberOfQuestions, args.subject!!.name, args.year, args.year)
+//        println(args.numberOfQuestions)
+//        println(args.subject!!.name)
+//        println(args.year)
+//        println(args.year)
+        if(args.lufa){
+            getRandomQuestion()
+        }else{
+            getSelectedQuestions(args.numberOfQuestions, args.subject!!.name, args.year, args.year)
+        }
+
         return binding.root
     }
 
@@ -92,6 +99,14 @@ class TaskFragment : Fragment() {
     }
 
     private fun setAnswers() {
+        //image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        //imageView.setImageBitmap(image);
+        //image = BitmapFactory.decodeStream(url.openConn)
+        if (questionsList!![currentTaskNum - 1].ImageLink != "") {
+            binding.taskImage.visibility = View.VISIBLE
+            Picasso.get().load(questionsList!![currentTaskNum - 1].ImageLink).into(binding.taskImage)
+        }
+        //binding.imageView.setImageBitmap(image)
         binding.currentSubject.text = questionsList!![currentTaskNum - 1].subject
         binding.taskDescription.text = questionsList!![currentTaskNum - 1].question
         binding.ansButton.text = "A: " + questionsList!![currentTaskNum - 1].answerA
@@ -335,6 +350,28 @@ class TaskFragment : Fragment() {
         })
         return items
     }
+
+    private fun getRandomQuestion(): List<Question>? {
+        var items: List<Question>? = emptyList()
+        retrofit = ApiClient.getRetrofit()
+        apiService = retrofit.create(ApiService::class.java)
+        apiService.getRandomQuestion().enqueue(object : Callback<Questions2> {
+            override fun onFailure(call: Call<Questions2>, t: Throwable) {
+                Log.e("error register!", t.message.toString())
+
+            }
+
+            override fun onResponse(call: Call<Questions2>, response: Response<Questions2>) {
+                val user = response.body()!!.data
+                questionsList = listOf(Question(ID=user.ID, CreatedAt=user.CreatedAt, UpdatedAt=user.UpdatedAt, DeletedAt=user.DeletedAt, question=user.question, answerA=user.answerA, answerB=user.answerB, answerC=user.answerC, answerD=user.answerD, correctAnswer=user.correctAnswer, subject=user.subject, year=user.year, ImageLink=user.ImageLink))
+                Log.e("DANE!", user.toString())
+                setAnswers()
+            }
+
+        })
+        return items
+    }
+
 
 
 }

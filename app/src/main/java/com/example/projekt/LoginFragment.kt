@@ -23,7 +23,6 @@ class LoginFragment : Fragment() {
     private var param2: String? = null
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
-    //var userToken: LoginResponse? = null
     var userToken: String? = null
     var activity: Activity? = getActivity()
 
@@ -60,10 +59,11 @@ class LoginFragment : Fragment() {
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val temp = response.body()
-                Log.e("Login token", temp.toString())
                 if (temp != null){
                     userToken = temp.token.toString()
+                    Token.myToken = userToken.toString()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    //odnosimy sie do tokenu Token.myToken
                 }
                 else{
                     Toast.makeText(getActivity(), "Niepoprawne dane logowania!", Toast.LENGTH_SHORT).show()

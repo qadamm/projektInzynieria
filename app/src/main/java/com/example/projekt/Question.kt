@@ -7,6 +7,13 @@ data class Questions(
     var data: List<Question>?
 
 )
+
+data class Questions2(
+    @SerializedName("data")
+    var data: Question
+
+)
+
 data class Question(
     //val questionn: Question?
     var ID: Int? = null,
