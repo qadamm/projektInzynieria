@@ -46,14 +46,11 @@ class TaskFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentTaskBinding.inflate(inflater, container, false)
         //getAllQuestions()
-//        println(args.numberOfQuestions)
-//        println(args.subject!!.name)
-//        println(args.year)
-//        println(args.year)
         if(args.lufa){
             getRandomQuestion()
         }else{
-            getSelectedQuestions(args.numberOfQuestions, args.subject!!.name, args.year, args.year)
+            //getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  args.year , args.year)
+            getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  2018 , 2022)
         }
 
         return binding.root
@@ -84,6 +81,11 @@ class TaskFragment : Fragment() {
     }
 
     private fun endTest() {
+        for (i in 1..maxTaskNum ) {
+            if (Answers[i-1] == questionsList!![i - 1].correctAnswer!!.toInt()){
+                correctAnswers += 1
+            }
+        }
         val actionTaskFragmentToResultFragment = TaskFragmentDirections.actionTaskFragmentToResultFragment(maxTaskNum, correctAnswers)
         findNavController().navigate(actionTaskFragmentToResultFragment)
         currentTaskNum = 1
@@ -94,19 +96,13 @@ class TaskFragment : Fragment() {
         binding.ansButton3.isClickable = false
         binding.ansButton4.isClickable = false
 
-
-
     }
 
     private fun setAnswers() {
-        //image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        //imageView.setImageBitmap(image);
-        //image = BitmapFactory.decodeStream(url.openConn)
         if (questionsList!![currentTaskNum - 1].ImageLink != "") {
             binding.taskImage.visibility = View.VISIBLE
             Picasso.get().load(questionsList!![currentTaskNum - 1].ImageLink).into(binding.taskImage)
         }
-        //binding.imageView.setImageBitmap(image)
         binding.currentSubject.text = questionsList!![currentTaskNum - 1].subject
         binding.taskDescription.text = questionsList!![currentTaskNum - 1].question
         binding.ansButton.text = "A: " + questionsList!![currentTaskNum - 1].answerA
@@ -117,34 +113,60 @@ class TaskFragment : Fragment() {
         isHintEnable()
         Log.e("skonczony?", isEnded.toString())
         if(Answers[currentTaskNum - 1 ] != 9){
-            setAnswer(Answers[currentTaskNum -1 ])
+            setAnswer(Answers[currentTaskNum - 1])
         }
         if(isEnded && Answers[currentTaskNum -1 ] != 9) {
-            setAnswer(Answers[currentTaskNum -1 ])
+            setAnswer(Answers[currentTaskNum - 1])
+            if (args.isRanked){
+                setRankedAnswer()
+            }
         }
         if(isEnded && Answers[currentTaskNum -1 ] == 9) {
-            Answers[currentTaskNum -1 ] = questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5
-            when(Answers[currentTaskNum -1 ]) {
-                0 -> {
-                    binding.ansButton.setBackgroundColor(Color.parseColor("#ff8800"))
-                    binding.ansButton.setTextColor(Color.WHITE)
-                }
-                1 -> {
-                    binding.ansButton2.setBackgroundColor(Color.parseColor("#ff8800"))
-                    binding.ansButton2.setTextColor(Color.WHITE)
-                }
-                2 -> {
-                    binding.ansButton3.setBackgroundColor(Color.parseColor("#ff8800"))
-                    binding.ansButton3.setTextColor(Color.WHITE)
-                }
-                3 -> {
-                    binding.ansButton4.setBackgroundColor(Color.parseColor("#ff8800"))
-                    binding.ansButton4.setTextColor(Color.WHITE)
+            if (args.isRanked){
+                setRankedAnswer()
+            }else{
+                Answers[currentTaskNum -1 ] = questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5
+                when(Answers[currentTaskNum -1 ]) {
+                    0 -> {
+                        binding.ansButton.setBackgroundColor(Color.parseColor("#ff8800"))
+                        binding.ansButton.setTextColor(Color.WHITE)
+                    }
+                    1 -> {
+                        binding.ansButton2.setBackgroundColor(Color.parseColor("#ff8800"))
+                        binding.ansButton2.setTextColor(Color.WHITE)
+                    }
+                    2 -> {
+                        binding.ansButton3.setBackgroundColor(Color.parseColor("#ff8800"))
+                        binding.ansButton3.setTextColor(Color.WHITE)
+                    }
+                    3 -> {
+                        binding.ansButton4.setBackgroundColor(Color.parseColor("#ff8800"))
+                        binding.ansButton4.setTextColor(Color.WHITE)
+                    }
                 }
             }
         }
+    }
 
-
+    private fun setRankedAnswer(){
+        when(questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5) {
+            0 -> {
+                binding.ansButton.setBackgroundColor(Color.parseColor("#008800"))
+                binding.ansButton.setTextColor(Color.WHITE)
+            }
+            1 -> {
+                binding.ansButton2.setBackgroundColor(Color.parseColor("#008800"))
+                binding.ansButton2.setTextColor(Color.WHITE)
+            }
+            2 -> {
+                binding.ansButton3.setBackgroundColor(Color.parseColor("#008800"))
+                binding.ansButton3.setTextColor(Color.WHITE)
+            }
+            3 -> {
+                binding.ansButton4.setBackgroundColor(Color.parseColor("#008800"))
+                binding.ansButton4.setTextColor(Color.WHITE)
+            }
+        }
     }
 
     private fun isAnswerEnable() {
@@ -162,18 +184,50 @@ class TaskFragment : Fragment() {
     }
 
     private fun setAnswer(position: Int) {
-        when(position){
-            0 -> checkCorrect(0)
-            1 -> checkCorrect(1)
-            2 -> checkCorrect(2)
-            3 -> checkCorrect(3)
+        if (args.isRanked) {
+            when (position) {
+                0 -> checkCorrectRanked(0)
+                1 -> checkCorrectRanked(1)
+                2 -> checkCorrectRanked(2)
+                3 -> checkCorrectRanked(3)
+            }
+        }else {
+            when (position) {
+                0 -> checkCorrect(0)
+                1 -> checkCorrect(1)
+                2 -> checkCorrect(2)
+                3 -> checkCorrect(3)
+            }
         }
-        Answers[currentTaskNum -1 ] = position
+        Answers[currentTaskNum - 1] = position
         isHintEnable()
         binding.ansButton.isClickable = false
         binding.ansButton2.isClickable = false
         binding.ansButton3.isClickable = false
         binding.ansButton4.isClickable = false
+
+
+    }
+
+    private fun checkCorrectRanked(position: Int){
+        when(position){
+            0 -> {
+                binding.ansButton.setBackgroundColor(Color.parseColor("#CCAA22"))
+                binding.ansButton.setTextColor(Color.WHITE)
+            }
+            1 -> {
+                binding.ansButton2.setBackgroundColor(Color.parseColor("#CCAA22"))
+                binding.ansButton2.setTextColor(Color.WHITE)
+            }
+            2 -> {
+                binding.ansButton3.setBackgroundColor(Color.parseColor("#CCAA22"))
+                binding.ansButton3.setTextColor(Color.WHITE)
+            }
+            3 -> {
+                binding.ansButton4.setBackgroundColor(Color.parseColor("#CCAA22"))
+                binding.ansButton4.setTextColor(Color.WHITE)
+            }
+        }
 
     }
 
