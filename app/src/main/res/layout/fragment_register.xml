@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Hasło"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/emailRegInput"
         app:layout_constraintStart_toStartOf="@+id/emailRegInput"
         app:layout_constraintTop_toBottomOf="@+id/emailRegInput" />
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Powtórz hasło"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/passwordRegInput"
         app:layout_constraintStart_toStartOf="@+id/passwordRegInput"
         app:layout_constraintTop_toBottomOf="@+id/passwordRegInput" />

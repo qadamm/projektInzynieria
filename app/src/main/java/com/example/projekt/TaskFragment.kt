@@ -49,8 +49,11 @@ class TaskFragment : Fragment() {
         if(args.lufa){
             getRandomQuestion()
         }else{
-            //getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  args.year , args.year)
-            getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  2018 , 2022)
+            if(args.year == 1){
+                getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  2015 , 2022)
+            } else {
+                getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  args.year , args.year)
+            }
         }
 
         return binding.root
@@ -304,23 +307,23 @@ class TaskFragment : Fragment() {
         var randomIndex = BadAnswers.random()
         when(randomIndex){
             0 -> {
-                binding.ansButton.setBackgroundColor(Color.parseColor("#808080"))
-                binding.ansButton.setTextColor(Color.RED)
+                binding.ansButton.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+                binding.ansButton.setTextColor(resources.getColor(R.color.material_dynamic_neutral90))
                 binding.ansButton.isClickable = false
             }
             1 -> {
-                binding.ansButton2.setBackgroundColor(Color.parseColor("#808080"))
-                binding.ansButton2.setTextColor(Color.RED)
+                binding.ansButton2.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+                binding.ansButton2.setTextColor(resources.getColor(R.color.material_dynamic_neutral90))
                 binding.ansButton2.isClickable = false
             }
             2 -> {
-                binding.ansButton3.setBackgroundColor(Color.parseColor("#808080"))
-                binding.ansButton3.setTextColor(Color.RED)
+                binding.ansButton3.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+                binding.ansButton3.setTextColor(resources.getColor(R.color.material_dynamic_neutral90))
                 binding.ansButton3.isClickable = false
             }
             3 -> {
-                binding.ansButton4.setBackgroundColor(Color.parseColor("#808080"))
-                binding.ansButton4.setTextColor(Color.RED)
+                binding.ansButton4.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
+                binding.ansButton4.setTextColor(resources.getColor(R.color.material_dynamic_neutral90))
                 binding.ansButton4.isClickable = false
             }
         }

@@ -37,7 +37,7 @@ class MySubjectRecyclerViewAdapter(
         val resource = when(item.name){
             //rysunki w liscie przedmiotów
             "Matematyka" -> R.drawable.ic_maths
-            "Język Polski" -> R.drawable.ic_import_contacts
+            "Język Polski" -> R.drawable.ic_polish
             "Chemia" -> R.drawable.ic_chemistry
             "Geografia" -> R.drawable.ic_geography
             "Język Angielski" -> R.drawable.ic_english_speaking_icon
