@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.example.projekt.databinding.FragmentSubjectBinding
-import com.example.projekt.placeholder.IMGNAMES
 import com.example.projekt.placeholder.SubjectItem
 
 /**

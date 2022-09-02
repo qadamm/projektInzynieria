@@ -17,10 +17,7 @@ import retrofit2.Retrofit
 
 
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private lateinit var binding: FragmentLoginBinding
-    private var param1: String? = null
-    private var param2: String? = null
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
     var userToken: String? = null
@@ -62,6 +59,7 @@ class LoginFragment : Fragment() {
                 if (temp != null){
                     userToken = temp.token.toString()
                     Token.myToken = userToken.toString()
+                    Token.email = request.email.toString()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     //odnosimy sie do tokenu Token.myToken
                 }

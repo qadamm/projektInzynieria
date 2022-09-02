@@ -43,13 +43,11 @@ object Subjects {
 
 }
 
-data class SubjectItem(val id: String, val name: String, val imageName: IMGNAMES = IMGNAMES.MAT): Parcelable {
+data class SubjectItem(val id: String, val name: String): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
-        parcel.readString()!!,
-        IMGNAMES.values()[parcel.readInt()]
-    ) {
-    }
+        parcel.readString()!!
+    )
 
     override fun toString(): String = name
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -70,8 +68,4 @@ data class SubjectItem(val id: String, val name: String, val imageName: IMGNAMES
             return arrayOfNulls(size)
         }
     }
-}
-
-enum class IMGNAMES {
-    MAT, POL, FIZ //Nazwy przedmiotów pod rysunki
 }

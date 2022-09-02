@@ -23,21 +23,43 @@ class TaskFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskBinding
     private var currentTaskNum = 1
-    private var correctAnswers = 0
     private var maxTaskNum = 10
+    private var correctAnswers = 0
+    private var questionHinted = -1
+    private var questionHintedAns = 5
     private var isHinted = false
     private var isEnded = false
-    private var Answers = IntArray(maxTaskNum){9}
     private val args: TaskFragmentArgs by navArgs()
-
-
 
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
-    private var mSelectedOptionPosition : String = ""
-    private var questionsList: List<Question>? = listOf(Question(ID=1, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:53:46Z", DeletedAt=null, question="Ladowanie pytania...", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="0", subject="Polski", year=2021),
-        Question(ID=2, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:53:46Z", DeletedAt=null, question="Tresc Pytania2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="3", subject="Polski", year=2021),
-        Question(ID=3, CreatedAt="2022-08-03T12:53:46Z", UpdatedAt="2022-08-03T12:33:46Z", DeletedAt=null, question="Tresc Pytania3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", answerA="CA", answerB="CB", answerC="CC", answerD="CD", correctAnswer="2", subject="Angielski", year=2022))
+
+    private var questionsList: List<Question>? = null
+    private var Answers = IntArray(maxTaskNum){9}
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if(args.lufa){
+            getRandomQuestion()
+        }else{
+            if (args.year == 1) {
+                getSelectedQuestions(
+                    args.numberOfQuestions,
+                    (args.subject?.name ?: "Matematyka"),
+                    2010,
+                    2022
+                )
+            } else {
+                getSelectedQuestions(
+                    args.numberOfQuestions,
+                    (args.subject?.name ?: "Matematyka"),
+                    args.year,
+                    args.year
+                )
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,16 +68,7 @@ class TaskFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentTaskBinding.inflate(inflater, container, false)
         //getAllQuestions()
-        if(args.lufa){
-            getRandomQuestion()
-        }else{
-            if(args.year == 1){
-                getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  2015 , 2022)
-            } else {
-                getSelectedQuestions(args.numberOfQuestions, (args.subject?.name ?: "Matematyka"),  args.year , args.year)
-            }
-        }
-
+        if (isEnded) setAnswers()
         return binding.root
     }
 
@@ -80,7 +93,7 @@ class TaskFragment : Fragment() {
         binding.ansButton4.setOnClickListener{setAnswer(3)}
         binding.endTestButton.setOnClickListener{endTest()}
 
-
+        TODO("POPRAWIC HINTY W RANKEDACH")
     }
 
     private fun endTest() {
@@ -114,7 +127,11 @@ class TaskFragment : Fragment() {
         binding.ansButton4.text = "D: " + questionsList!![currentTaskNum - 1].answerD
         isAnswerEnable()
         isHintEnable()
-        Log.e("skonczony?", isEnded.toString())
+
+
+        if((currentTaskNum - 1) == questionHinted){
+            removeHinted(questionHintedAns)
+        }
         if(Answers[currentTaskNum - 1 ] != 9){
             setAnswer(Answers[currentTaskNum - 1])
         }
@@ -128,8 +145,7 @@ class TaskFragment : Fragment() {
             if (args.isRanked){
                 setRankedAnswer()
             }else{
-                Answers[currentTaskNum -1 ] = questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5
-                when(Answers[currentTaskNum -1 ]) {
+                when(questionsList!![currentTaskNum - 1].correctAnswer?.toInt() ?: 5) {
                     0 -> {
                         binding.ansButton.setBackgroundColor(Color.parseColor("#ff8800"))
                         binding.ansButton.setTextColor(Color.WHITE)
@@ -305,7 +321,13 @@ class TaskFragment : Fragment() {
         var BadAnswers  = mutableListOf<Int>(0,1,2,3)
         BadAnswers.remove(questionsList!![currentTaskNum -1 ].correctAnswer?.toInt())
         var randomIndex = BadAnswers.random()
-        when(randomIndex){
+        questionHintedAns = randomIndex
+        questionHinted = currentTaskNum - 1
+        removeHinted(randomIndex)
+    }
+
+    private fun removeHinted(Index: Int) {
+        when(Index){
             0 -> {
                 binding.ansButton.setBackgroundColor(resources.getColor(R.color.material_dynamic_neutral90))
                 binding.ansButton.setTextColor(resources.getColor(R.color.material_dynamic_neutral90))
@@ -327,8 +349,6 @@ class TaskFragment : Fragment() {
                 binding.ansButton4.isClickable = false
             }
         }
-
-
     }
 
     private fun prevQuestion() {

@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding.loggedAccountName.text = "Email użytkowanika: " + Token.email
         binding.testButton.setOnClickListener{ findNavController().navigate(R.id.action_homeFragment_to_subjectFragment) }
         binding.lufaButton.setOnClickListener{ startLufa() }
         binding.rankButton.setOnClickListener{ startRanked() }

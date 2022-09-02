@@ -96,5 +96,14 @@
         android:id="@+id/profileFragment"
         android:name="com.example.projekt.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_rankFragment"
+            app:destination="@id/rankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rankFragment"
+        android:name="com.example.projekt.RankFragment"
+        android:label="fragment_rank_list"
+        tools:layout="@layout/fragment_rank_list" />
 </navigation>
