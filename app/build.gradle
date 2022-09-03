@@ -33,7 +33,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+
 }
+
 
 dependencies {
 
@@ -55,7 +58,10 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.6.1' //dodane z filmiku nie wiem po co  XD
     implementation 'com.squareup.picasso:picasso:2.71828'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'com.github.quantaDot:MathRenderer:1.0.3'
+
 }
