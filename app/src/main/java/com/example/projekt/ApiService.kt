@@ -7,7 +7,6 @@ import retrofit2.http.*
 interface ApiService {
     @GET("api/questions/")
     fun getQuestions(): Call<Questions>
-//    suspend fun getQuestions(): Response<Questions>
 
     @GET("api/questions/random")
     fun getRandomQuestion(): Call<Questions2>

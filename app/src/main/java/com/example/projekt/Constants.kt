@@ -6,4 +6,5 @@ object Constants {
 object Token {
     var myToken: String = "brak"
     var email: String = "brak"
+    var username: String = "brak"
 }

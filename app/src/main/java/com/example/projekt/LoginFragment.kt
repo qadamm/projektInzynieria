@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.projekt.Token.email
 import com.example.projekt.databinding.FragmentLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +24,7 @@ class LoginFragment : Fragment() {
     var userToken: String? = null
     var activity: Activity? = getActivity()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +37,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.loginButton.setOnClickListener { validateForm() }
         binding.newRegButton.setOnClickListener { findNavController().navigate(R.id.action_loginFragment_to_registerFragment) }
+        //getAllScores()
     }
 
     fun login() {
@@ -57,9 +60,9 @@ class LoginFragment : Fragment() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val temp = response.body()
                 if (temp != null){
-                    userToken = temp.token.toString()
-                    Token.myToken = userToken.toString()
+                    Token.myToken = temp.token.toString()
                     Token.email = request.email.toString()
+                    Token.username = temp.username.toString()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     //odnosimy sie do tokenu Token.myToken
                 }
@@ -69,6 +72,9 @@ class LoginFragment : Fragment() {
             }
         })
     }
+
+
+
     private fun validateForm() {
         if (binding.userInput.text.isEmpty()) {
             Toast.makeText(getActivity(), "Proszę podać Email!", Toast.LENGTH_SHORT).show()
