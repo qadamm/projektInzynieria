@@ -35,6 +35,7 @@ class RankFragment : Fragment(), RankListListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Ranks.getAllScores()
 
         binding.backProfileButton.setOnClickListener { findNavController().popBackStack(R.id.profileFragment, false) }
     }
@@ -46,4 +47,5 @@ class RankFragment : Fragment(), RankListListener {
     override fun onItemLongClick(position: Int) {
         TODO("Not yet implemented")
     }
+
 }

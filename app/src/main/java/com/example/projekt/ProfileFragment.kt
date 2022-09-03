@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.projekt.databinding.FragmentProfileBinding
 import com.example.projekt.databinding.FragmentTaskBinding
+import com.example.projekt.placeholder.Ranks
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,19 +22,23 @@ class ProfileFragment : Fragment() {
 
     lateinit var retrofit: Retrofit
     lateinit var apiService: ApiService
-
+    var userScore = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        getUserResult()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Ranks.getAllScores()
+        binding.profileAccountName.text = Token.username
+        binding.profileScore.text = "Wynik rankingowy: 0 pkt"
         binding.profilePicture.setImageResource(R.drawable.avatar)
         binding.showRankingButton.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_rankFragment) }
         binding.backHomeButton.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -51,13 +56,10 @@ class ProfileFragment : Fragment() {
             override fun onResponse(call: Call<ScoreResponse>, response: Response<ScoreResponse>) {
                 val temp = response.body()
                 if (temp != null){
+                    userScore = temp.score.toString()
                     println(temp.user)
                     println(temp.score)
-                    //userToken = temp.token.toString()
-                    //Token.myToken = userToken.toString()
-                    //Token.email = request.email.toString()
-                    // findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                    //odnosimy sie do tokenu Token.myToken
+                    binding.profileScore.text = "Wynik rankingowy: $userScore pkt"
                 }
                 else{
                     Toast.makeText(getActivity(), "Niepoprawne dane logowania!", Toast.LENGTH_SHORT).show()

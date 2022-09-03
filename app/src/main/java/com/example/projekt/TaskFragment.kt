@@ -93,7 +93,7 @@ class TaskFragment : Fragment() {
         binding.ansButton4.setOnClickListener{setAnswer(3)}
         binding.endTestButton.setOnClickListener{endTest()}
 
-        TODO("POPRAWIC HINTY W RANKEDACH")
+
     }
 
     private fun endTest() {
@@ -420,7 +420,7 @@ class TaskFragment : Fragment() {
 
             override fun onResponse(call: Call<Questions>, response: Response<Questions>) {
                 val user = response.body()?.data
-                questionsList = user
+                questionsList = user!!.shuffled()
                 setAnswers()
             }
 

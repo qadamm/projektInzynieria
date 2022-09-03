@@ -33,7 +33,6 @@ data class Question(
 
 data class Scores(
     var data: List<Score>?
-
 )
 
 data class Score (

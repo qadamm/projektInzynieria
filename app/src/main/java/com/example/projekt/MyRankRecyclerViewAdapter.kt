@@ -9,6 +9,7 @@ import android.widget.TextView
 
 import com.example.projekt.databinding.FragmentRankBinding
 import com.example.projekt.placeholder.RankItem
+import com.example.projekt.placeholder.Ranks
 
 /**
  * [RecyclerView.Adapter] that can display a [RankItem].
@@ -36,6 +37,7 @@ class MyRankRecyclerViewAdapter(
         val resource = R.drawable.ic_account_circle
         holder.imgView.setImageResource(resource)
         holder.nameView.text = item.name
+        holder.scoreView.text = item.score
 
         holder.itemContainer.setOnClickListener{
             eventListener.onItemClick(position)
@@ -52,7 +54,10 @@ class MyRankRecyclerViewAdapter(
     inner class ViewHolder(binding: FragmentRankBinding) : RecyclerView.ViewHolder(binding.root) {
         val imgView: ImageView = binding.rankAvatar
         val nameView: TextView = binding.rankItemName
+        val scoreView: TextView = binding.rankItemScore
         val itemContainer: View = binding.root
+
+
 
         override fun toString(): String {
             return super.toString() + " '" + nameView.text + "'"
