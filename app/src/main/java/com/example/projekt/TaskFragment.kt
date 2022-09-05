@@ -1,6 +1,5 @@
 package com.example.projekt
 
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -16,8 +15,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.util.*
-import kotlin.random.Random.Default.nextInt
 
 class TaskFragment : Fragment() {
 
@@ -118,13 +115,15 @@ class TaskFragment : Fragment() {
         if (questionsList!![currentTaskNum - 1].ImageLink != "") {
             binding.taskImage.visibility = View.VISIBLE
             Picasso.get().load(questionsList!![currentTaskNum - 1].ImageLink).into(binding.taskImage)
+        } else {
+            binding.taskImage.visibility = View.GONE
         }
         binding.currentSubject.text = questionsList!![currentTaskNum - 1].subject
         binding.taskDescription.text = questionsList!![currentTaskNum - 1].question
-        binding.ansButton.text = "A: " + questionsList!![currentTaskNum - 1].answerA
-        binding.ansButton2.text = "B: " + questionsList!![currentTaskNum - 1].answerB
-        binding.ansButton3.text = "C: " + questionsList!![currentTaskNum - 1].answerC
-        binding.ansButton4.text = "D: " + questionsList!![currentTaskNum - 1].answerD
+        binding.mathRenderA.text = questionsList!![currentTaskNum - 1].answerA
+        binding.mathRenderB.text = questionsList!![currentTaskNum - 1].answerB
+        binding.mathRenderC.text = questionsList!![currentTaskNum - 1].answerC
+        binding.mathRenderD.text = questionsList!![currentTaskNum - 1].answerD
         isAnswerEnable()
         isHintEnable()
 

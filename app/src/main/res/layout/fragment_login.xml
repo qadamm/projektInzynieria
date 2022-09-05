@@ -14,8 +14,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:text="\\begin{array}{cc} a &amp; b \\\\ c &amp; d \\end{array}"
+        app:text=" \\(a^{24}\\pi \\bullet \\bigoplus \\triangledown \\triangledown \\circ \\blacklozenge \\barwedge \\bigcirc \\star \\bigtriangleup\\) "
         />
+
     <TextView
         android:id="@+id/loginLabel"
         android:layout_width="0dp"
